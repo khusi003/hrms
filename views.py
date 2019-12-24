@@ -97,6 +97,10 @@ def edit_employee(request):
         if uid:
             print('=====================',uid)
 
+
+def ticket(request):
+    return render(request,'hrms/tickets.html')            
+
 def logout(request):
     if "email" in request.session:
         del request.session['uid']
