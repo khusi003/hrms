@@ -42,10 +42,30 @@ def login_hr(request):
 
 
 def profile(request):
-    return render(request,'hrms/profile.html')   
+    try:
+        data = Add_Emoployess.objects.all()
+        if data:
+            for i in data:
+                print('===============',i.id)
+                return render(request,'hrms/profile.html',{'data':data}) 
+        else:
+            return render(request,'hrms/profile.html') 
+    except:
+        return render(request,'hrms/profile.html')
 
 def employees(request):
-    return render(request,'hrms/employees.html')  
+    try:
+        data = Add_Emoployess.objects.all()
+        if data:
+            for i in data:
+                print('===============',i.id)
+                return render(request,'hrms/employees.html',{'data':data}) 
+        else:
+            return render(request,'hrms/employees.html') 
+    except:
+        return render(request,'hrms/employees.html') 
+
+
 
 def add_employee(request):
     firstname = request.POST['firstname']
@@ -73,7 +93,7 @@ def add_employee(request):
         if uid:
             s_msg="Successfully Added"
             send_mail('Welcome to HRMS system','your login id and password are : '+email +password,'khushipatel284@gmail.com',[email])
-            return render(request,'hrms/employees.html',{'s_msg':s_msg},{'uid':uid})
+            return render(request,'hrms/employees.html',{'s_msg':s_msg})
         else:
             e_msg="Try Again"
             return render(request,'hrms/employees.html',{'e_msg':e_msg})
@@ -81,25 +101,90 @@ def add_employee(request):
         e_msg='password and confirm password does not match'
         return render(request,'hrms/employees.html',{'e_msg':e_msg})
 
-def edit_employee(request):
-    firstname = request.POST['firstname']
-    lastname = request.POST['lastname']
-    email = request.POST['email']
-    password = request.POST['password']
-    repassword = request.POST['repassword']
-    employee_id = request.POST['employee_id']
-    joining_date = request.POST['joining_date']
-    phone = request.POST['phone']
-    department = request.POST['department']
-    designation = request.POST['designation']
-    if password==repassword:
-        uid = Add_Emoployess.objects.get(firstname=firstname,lastname=lastname,email=email,password=password,employee_id=employee_id,joining_date=joining_date,phone=phone,department=department,designation=designation)
-        if uid:
-            print('=====================',uid)
 
 
 def ticket(request):
-    return render(request,'hrms/tickets.html')            
+    return render(request,'hrms/tickets.html')  
+
+def holiday(request):
+    try:
+        data = Holidays.objects.all()
+        if data:
+            for i in data:
+                return render(request,'hrms/holidays.html',{'data':data}) 
+        else:        
+            return render(request,'hrms/holidays.html') 
+    except:
+        return render(request,'hrms/holidays.html')  
+
+
+def add_holiday(request):
+    name = request.POST['name']
+    date = request.POST['date']
+    day = request.POST['day']
+    uid = Holidays.objects.create(name=name,date=date,day=day)
+    if uid:
+        # print('=============================success') 
+        return render(request,'hrms/holidays.html')
+    else:
+        return render(request,'hrms/holidays.html')  
+
+def department(request):
+    try:
+        data = Department.objects.all()
+        if data:
+            # for i in data:
+            return render(request,'hrms/departments.html',{'data':data}) 
+        else:
+            return render(request,'hrms/departments.html') 
+    except:
+        return render(request,'hrms/departments.html') 
+
+
+def add_department(request):
+    try:
+        d_name = request.POST['d_name']
+        uid=Department.objects.create(d_name=d_name)
+        if uid:
+            return render(request,'hrms/departments.html')  
+        else:
+            return render(request,'hrms/departments.html')  
+    except:
+            return render(request,'hrms/departments.html')
+
+
+def designation(request):
+    try:
+        data = Designation.objects.all()
+        if data:
+            # for i in data:
+            return render(request,'hrms/designations.html',{'data':data}) 
+        else:
+            return render(request,'hrms/designations.html') 
+    except:
+        return render(request,'hrms/designations.html') 
+
+
+def add_designation(request):
+    try:
+        d_name = request.POST['d_name']
+        uid = Department.objects.get(d_name=d_name)
+
+
+        designation_name = request.POST['designation_name']
+        uid=Designation.objects.create(d_name=d_name)
+        if uid:
+            return render(request,'hrms/designations.html')  
+        else:
+            return render(request,'hrms/designations.html')  
+    except:
+            return render(request,'hrms/designations.html')              
+        
+
+
+        
+
+
 
 def logout(request):
     if "email" in request.session:

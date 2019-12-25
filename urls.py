@@ -21,10 +21,19 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('login-hr/',views.login_hr,name='login-hr'),
     path('profile/',views.profile,name='profile'),
+
     path('employees/',views.employees,name='employees'),
     path('add-employee/',views.add_employee,name='add-employee'),
-    path('edit-employee/',views.edit_employee,name='edit-employee'),
     path('ticket/',views.ticket,name='ticket'),
+
+    path('holiday/',views.holiday,name='holiday'),
+    path('add-holiday/',views.add_holiday,name='add-holiday'),
+
+    path('department/',views.department,name='department'),
+    path('add-department/',views.add_department,name='add-department'),
+
+    path('designation/',views.designation,name='designation'),
+    path('add-designation/',views.add_designation,name='add-designation'),
 
     path('logout/',views.logout,name='logout'),
 ]

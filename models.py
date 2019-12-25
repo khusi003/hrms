@@ -76,9 +76,32 @@ class Ticket(models.Model):
     assign = models.CharField(max_length= 50)
     followers = models.CharField(max_length= 50)
     description = models.CharField(max_length= 50)
-    file=models.FileField(upload_to='img/')
+    file=models.FileField(upload_to='hrms/img/')
     created_at= models.DateTimeField(auto_now_add=True,blank=False)
     updated_at = models.DateTimeField(auto_now = True, blank=False)
 
+class Add_Client(models.Model):
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50) 
+    username = models.CharField(max_length=50)
+    email = models.EmailField(unique= True)
+    password = models.CharField(max_length = 20)
+    client_id = models.CharField(max_length=50)
+    phone = models.CharField(max_length = 10)
+    profile_pic=models.FileField(upload_to='hrms/img/',default='avatar.png')
+    created_at= models.DateTimeField(auto_now_add=True,blank=False)
+    updated_at = models.DateTimeField(auto_now = True, blank=False)
 
+class Holidays(models.Model):
+    name = models.CharField(max_length=50)
+    date = models.CharField(max_length=50)
+    day = models.CharField(max_length=50)
 
+class Department(models.Model):
+    d_name = models.CharField(max_length=50)
+
+class Designation(models.Model):
+    designation_name = models.CharField(max_length=50)
+    d_name = models.ForeignKey(Department, on_delete=models.CASCADE)    
+
+    
