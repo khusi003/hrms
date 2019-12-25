@@ -143,10 +143,11 @@ def department(request):
 
 def add_department(request):
     try:
+        data = Department.objects.all()
         d_name = request.POST['d_name']
         uid=Department.objects.create(d_name=d_name)
         if uid:
-            return render(request,'hrms/departments.html')  
+            return render(request,'hrms/departments.html',{'data':data})  
         else:
             return render(request,'hrms/departments.html')  
     except:
@@ -155,7 +156,7 @@ def add_department(request):
 
 def designation(request):
     try:
-        data = Designation.objects.all()
+        data = Designation.objects.all().prefetch_related('d_name')
         if data:
             # for i in data:
             return render(request,'hrms/designations.html',{'data':data}) 
@@ -167,24 +168,24 @@ def designation(request):
 
 def add_designation(request):
     try:
+        data = Designation.objects.all().prefetch_related('d_name')
         d_name = request.POST['d_name']
         uid = Department.objects.get(d_name=d_name)
-
-
-        designation_name = request.POST['designation_name']
-        uid=Designation.objects.create(d_name=d_name)
         if uid:
-            return render(request,'hrms/designations.html')  
-        else:
-            return render(request,'hrms/designations.html')  
+            print('==============',uid)
+        
+            designation_name = request.POST['designation_name']
+            print('====================',designation_name)
+            
+            insert=Designation.objects.create(designation_name=designation_name,d_name=uid)
+            if insert:
+                print('===================success')
+                return render(request,'hrms/designations.html',{'data':data})  
+            else:
+                return render(request,'hrms/designations.html')  
     except:
             return render(request,'hrms/designations.html')              
         
-
-
-        
-
-
 
 def logout(request):
     if "email" in request.session:
