@@ -36,4 +36,7 @@ urlpatterns = [
     path('add-designation/',views.add_designation,name='add-designation'),
 
     path('logout/',views.logout,name='logout'),
+
+    path(r'^empdetails/(?P<pk>\d+)/$', views.empdetails, name='emp_details'),
+
 ]

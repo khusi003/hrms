@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from .models import *
 from django.core.mail import send_mail
+
 # Create your views here.
+
 def indexpage(request):
     if 'email' in request.session:
         uid=User.objects.get(email=request.session['email'])
@@ -40,7 +42,6 @@ def login_hr(request):
         e_msg="User Does Not Exist"   
         return render(request,'hrms/login.html',{'e_msg':e_msg})  
 
-
 def profile(request):
     try:
         data = Add_Emoployess.objects.all()
@@ -64,6 +65,14 @@ def employees(request):
             return render(request,'hrms/employees.html') 
     except:
         return render(request,'hrms/employees.html') 
+
+
+def empdetails(request,pk=None):
+    e_id=Add_Emoployess.objects.get(id=pk)
+    data = Add_Emoployess.objects.all()
+
+    print("----------------------->",e_id.firstname)
+    return render(request,'hrms/profile.html',{'e_id':e_id,'data':data}) 
 
 
 
@@ -119,13 +128,14 @@ def holiday(request):
 
 
 def add_holiday(request):
+    data = Holidays.objects.all()
     name = request.POST['name']
     date = request.POST['date']
     day = request.POST['day']
     uid = Holidays.objects.create(name=name,date=date,day=day)
     if uid:
         # print('=============================success') 
-        return render(request,'hrms/holidays.html')
+        return render(request,'hrms/holidays.html',{'data':data})
     else:
         return render(request,'hrms/holidays.html')  
 
@@ -151,7 +161,7 @@ def add_department(request):
         else:
             return render(request,'hrms/departments.html')  
     except:
-            return render(request,'hrms/departments.html')
+        return render(request,'hrms/departments.html')
 
 
 def designation(request):

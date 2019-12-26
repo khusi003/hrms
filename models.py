@@ -65,6 +65,12 @@ class Add_Emoployess(models.Model):
     p_from = models.CharField(max_length= 50)
     p_to = models.CharField(max_length= 50)
 
+    # Bank Details
+    bank_name = models.CharField(max_length= 500)
+    acc_num = models.CharField(max_length= 500)
+    ifsc = models.CharField(max_length= 500)
+    pan_no = models.CharField(max_length= 500)
+
 class Ticket(models.Model):
     uid = models.ForeignKey(Add_Emoployess,on_delete = models.CASCADE)
     subject = models.CharField(max_length= 50)

@@ -48,7 +48,7 @@
 
 			<!-- Logo -->
 			<div class="header-left">
-				<a href="index.html" class="logo">
+				<a href="{% url 'hrms:home' %}" class="logo">
 					<img src="{% static 'hrms\assets\img\logo.png' %}" width="40" height="40" alt="">
 				</a>
 			</div>
@@ -397,16 +397,16 @@
 							<a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span
 									class="menu-arrow"></span></a>
 							<ul style="display: none;">
-								<li><a class="active" href="employees.html">All Employees</a></li>
-								<li><a href="holidays.html">Holidays</a></li>
+								<li><a class="active" href="{% url 'hrms:employees' %}">All Employees</a></li>
+								<li><a href="{% url 'hrms:holiday' %}">Holidays</a></li>
 								<li><a href="leaves.html">Leaves (Admin) <span
 											class="badge badge-pill bg-primary float-right">1</span></a></li>
 								<li><a href="leaves-employee.html">Leaves (Employee)</a></li>
 								<li><a href="leave-settings.html">Leave Settings</a></li>
 								<li><a href="attendance.html">Attendance (Admin)</a></li>
 								<li><a href="attendance-employee.html">Attendance (Employee)</a></li>
-								<li><a href="departments.html">Departments</a></li>
-								<li><a href="designations.html">Designations</a></li>
+								<li><a href="{% url 'hrms:department' %}">Departments</a></li>
+								<li><a href="{% url 'hrms:designation' %}">Designations</a></li>
 								<li><a href="timesheet.html">Timesheet</a></li>
 								<li><a href="overtime.html">Overtime</a></li>
 							</ul>
@@ -712,11 +712,11 @@
 					<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
 						<div class="profile-widget">
 							<div class="profile-img">
-								<a href="{% url 'hrms:profile' %}" class="avatar"><img src="{{i.profile_pic.url}}"
+								<a href="{% url 'hrms:emp_details' pk=i.id %}" class="avatar"><img src="{{i.profile_pic.url}}"
 										alt=""></a>
 							</div>
 							<div class="dropdown profile-action">
-								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+								<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="#" data-toggle="modal"

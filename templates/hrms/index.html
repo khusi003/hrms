@@ -43,7 +43,7 @@
 			
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="index.html" class="logo">
+                    <a href="{% url 'hrms:home' %}" class="logo">
 						<img src="{% static 'hrms\assets\img\logo.png' %}" width="40" height="40" alt="">
 					</a>
                 </div>
@@ -367,10 +367,8 @@
 								<ul style="display: none;">
 									<li><a href="{% url 'hrms:employees' %}">All Employees</a></li>
 									<li><a href="{% url 'hrms:holiday' %}">Holidays</a></li>
-									<li><a href="leaves.html">Leaves (Admin) <span class="badge badge-pill bg-primary float-right">1</span></a></li>
-									<li><a href="leaves-employee.html">Leaves (Employee)</a></li>
+									<li><a href="leaves-employee.html">Leaves </a></li>
 									<li><a href="leave-settings.html">Leave Settings</a></li>
-									<li><a href="attendance.html">Attendance (Admin)</a></li>
 									<li><a href="attendance-employee.html">Attendance (Employee)</a></li>
 									<li><a href="{% url 'hrms:department' %}">Departments</a></li>
 									<li><a href="{% url 'hrms:designation' %}">Designations</a></li>
